@@ -22,8 +22,23 @@ class TeamBuilder extends Component {
         bottom: 0,
         red: 0
       },
-      totalPoints: 10
+      totalPoints: 10,
+      purchaseable: false
     }
+  }
+
+  updatePurchaseState (elements) {
+
+    const sum = Object.keys(elements).map(elKey => {
+      return elements[elKey];
+    })
+    .reduce((sum, el) => {
+      return sum + el
+    }, 0);
+    this.setState({
+      purchaseable: sum > 0
+      // if at least one element, true
+    })
   }
 
   addElementHandler = (type) => {
@@ -40,11 +55,15 @@ class TeamBuilder extends Component {
       totalPoints: newPoint,
       elements: updatedElements
     })
+    this.updatePurchaseState(updatedElements);
 
   }
 
-  removeElementHandler = (props) => {
+  removeElementHandler = (type) => {
     const oldCount = this.state.elements[type];
+    if (oldCount <= 0) {
+      return;
+    }
     const updatedCount = oldCount - 1;
     const updatedElements = {
       ...this.state.elements
@@ -52,19 +71,31 @@ class TeamBuilder extends Component {
     updatedElements[type] = updatedCount;
     const pointReduction = ELEMENT_POINTS[type];
     const oldPoint = this.state.totalPoints;
-    const newPoint = oldPoint - pointAddition;
+    const newPoint = oldPoint - pointReduction;
     this.setState({
       totalPoints: newPoint,
       elements: updatedElements
     })
+      this.updatePurchaseState(updatedElements);
   }
+
   render() {
+    const disabledInfo = {
+      ...this.state.elements
+    }
+    for (let key in disabledInfo) {
+      disabledInfo[key] = disabledInfo[key] <= 0
+      // updates the new state (disabledInfo) with true or false
+    }
     return (
       <Aux>
       <Team elements={this.state.elements}/>
       <BuildControls
         elementAdded={this.addElementHandler}
         elementRemoved={this.removeElementHandler}
+        disabled={disabledInfo}
+        points={this.state.totalPoints}
+        purchaseable={this.state.purchaseable}
       />
       </Aux>
     )

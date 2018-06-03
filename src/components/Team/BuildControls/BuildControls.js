@@ -11,13 +11,17 @@ const controls = [
 
 const BuildControls = (props) => (
   <div className="buildcontrols">
+  <p>Points: <strong>{props.points}</strong></p>
     {controls.map(control => (
       <BuildControl key={control.label}
                     label={control.label}
                     added={() => props.elementAdded(control.type)}
                     removed={() => props.elementRemoved(control.type)}
+                    disabled={props.disabled[control.type]}
                      />
     ))}
+    <button className="completeButton" disabled={!props.purchaseable}>Complete
+    </button>
   </div>
 )
 
