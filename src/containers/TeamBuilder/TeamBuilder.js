@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Aux from '../../hoc/Aux'
 import Team from '../../components/Team/Team'
 import BuildControls from '../../components/Team/BuildControls/BuildControls'
+import Modal from '../../components/UI/Modal/Modal'
+import Summary from '../../components/Team/Summary/Summary'
 
 
 const ELEMENT_POINTS = {
@@ -23,7 +25,8 @@ class TeamBuilder extends Component {
         red: 0
       },
       totalPoints: 10,
-      purchaseable: false
+      purchaseable: false,
+      purchasing: false
     }
   }
 
@@ -79,6 +82,12 @@ class TeamBuilder extends Component {
       this.updatePurchaseState(updatedElements);
   }
 
+  purchaseHandler = () => {
+    this.setState({
+      purchasing: true
+    })
+  }
+
   render() {
     const disabledInfo = {
       ...this.state.elements
@@ -89,6 +98,9 @@ class TeamBuilder extends Component {
     }
     return (
       <Aux>
+      <Modal show={this.state.purchasing}>
+        <Summary elements={this.state.elements} />
+      </Modal>
       <Team elements={this.state.elements}/>
       <BuildControls
         elementAdded={this.addElementHandler}
@@ -96,6 +108,7 @@ class TeamBuilder extends Component {
         disabled={disabledInfo}
         points={this.state.totalPoints}
         purchaseable={this.state.purchaseable}
+        ordered={this.purchaseHandler}
       />
       </Aux>
     )

@@ -18,9 +18,15 @@ const BuildControls = (props) => (
                     added={() => props.elementAdded(control.type)}
                     removed={() => props.elementRemoved(control.type)}
                     disabled={props.disabled[control.type]}
+
                      />
     ))}
-    <button className="completeButton" disabled={!props.purchaseable}>Complete
+    <button
+    className="completeButton"
+    disabled={!props.purchaseable}
+    onClick={props.ordered}
+    >
+    Complete
     </button>
   </div>
 )
