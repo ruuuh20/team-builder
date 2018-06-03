@@ -15,6 +15,12 @@ class TeamElement extends Component  {
             <div className='top'></div>
           )
           break;
+        case ('blue'):
+          element = <div className="blue"></div>;
+          break;
+        case ('red'):
+          element = <div className="red"></div>
+          break;
         default:
           element = null
       }
