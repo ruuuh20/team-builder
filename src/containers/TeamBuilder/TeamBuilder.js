@@ -42,11 +42,30 @@ class TeamBuilder extends Component {
     })
 
   }
+
+  removeElementHandler = (props) => {
+    const oldCount = this.state.elements[type];
+    const updatedCount = oldCount - 1;
+    const updatedElements = {
+      ...this.state.elements
+    };
+    updatedElements[type] = updatedCount;
+    const pointReduction = ELEMENT_POINTS[type];
+    const oldPoint = this.state.totalPoints;
+    const newPoint = oldPoint - pointAddition;
+    this.setState({
+      totalPoints: newPoint,
+      elements: updatedElements
+    })
+  }
   render() {
     return (
       <Aux>
       <Team elements={this.state.elements}/>
-      <BuildControls elementAdded={this.addElementHandler}/>
+      <BuildControls
+        elementAdded={this.addElementHandler}
+        elementRemoved={this.removeElementHandler}
+      />
       </Aux>
     )
   }

@@ -15,6 +15,7 @@ const BuildControls = (props) => (
       <BuildControl key={control.label}
                     label={control.label}
                     added={() => props.elementAdded(control.type)}
+                    removed={() => props.elementRemoved(control.type)}
                      />
     ))}
   </div>
