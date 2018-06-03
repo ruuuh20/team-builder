@@ -88,6 +88,16 @@ class TeamBuilder extends Component {
     })
   }
 
+  cancelPurchase = () => {
+    this.setState({
+      purchasing: false
+    })
+  }
+
+  continuePurchase = () => {
+    alert('continueee')
+  }
+
   render() {
     const disabledInfo = {
       ...this.state.elements
@@ -98,8 +108,11 @@ class TeamBuilder extends Component {
     }
     return (
       <Aux>
-      <Modal show={this.state.purchasing}>
-        <Summary elements={this.state.elements} />
+      <Modal show={this.state.purchasing} modalClosed={this.cancelPurchase}>
+        <Summary
+          elements={this.state.elements}
+          purchaseCanc={this.cancelPurchase}
+          purchaseCont={this.continuePurchase} />
       </Modal>
       <Team elements={this.state.elements}/>
       <BuildControls
