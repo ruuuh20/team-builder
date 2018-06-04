@@ -6,6 +6,7 @@ import Modal from '../../components/UI/Modal/Modal'
 import Summary from '../../components/Team/Summary/Summary'
 import axios from '../../axios-file';
 import Spinner from '../../components/UI/Spinner/Spinner'
+import withError from '../../hoc/withError/withError'
 
 
 const ELEMENT_POINTS = {
@@ -157,4 +158,4 @@ class TeamBuilder extends Component {
   }
 }
 
-export default TeamBuilder;
+export default withError(TeamBuilder, axios);
