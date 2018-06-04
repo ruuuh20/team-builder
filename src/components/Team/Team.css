@@ -8,6 +8,27 @@
   font-size: 1.2rem;
 }
 
+.main-container{
+  padding: 0.5em;
+  width: 70%;
+  margin: auto;
+  text-align: center;
+}
+
+.field {
+  /* background-color: #206C3F; */
+    background-color: #6E8C57;
+  border-radius: 10px;
+  color: #fff;
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 10px;
+  grid-template-rows: repeat(12, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  padding: 1em;
+  margin-bottom: 2em;
+}
+
 @media (min-width: 1000px) and (min-height: 700px) {
   .burger {
     width: 700px;

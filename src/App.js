@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Layout from './components/Layout/Layout'
+import Layout from './containers/Layout/Layout'
 import TeamBuilder from './containers/TeamBuilder/TeamBuilder'
 
 class App extends Component {
@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <div>
       <Layout>
-      <TeamBuilder />
+        <TeamBuilder />
 
       </Layout>
 

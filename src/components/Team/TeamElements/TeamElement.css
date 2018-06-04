@@ -40,6 +40,13 @@
   margin: auto;
 } */
 
+.main-container{
+  padding: 0.5em;
+  width: 70%;
+  margin: auto;
+  text-align: center;
+}
+
 .field {
   /* background-color: #206C3F; */
     background-color: #6E8C57;

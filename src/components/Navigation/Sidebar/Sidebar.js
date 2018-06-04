@@ -7,7 +7,7 @@ import Aux from '../../../hoc/Aux'
 
 const Sidebar = (props) => {
 
-  let classes = ["sidebar", "close"];
+  let classes = ["sidebar", "close"]
   if (props.open) {
     classes = ["sidebar", "open"]
   }
@@ -15,7 +15,7 @@ const Sidebar = (props) => {
   return (
     <Aux>
     <Backdrop show={props.open} clicked={props.closed}/>
-    <div>
+    <div className={classes.join(" ")}>
       <Logo />
       <nav>
         <NavigationItems />
