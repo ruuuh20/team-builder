@@ -15,7 +15,7 @@ const Sidebar = (props) => {
   return (
     <Aux>
     <Backdrop show={props.open} clicked={props.closed}/>
-    <div className={classes.join}>
+    <div>
       <Logo />
       <nav>
         <NavigationItems />

@@ -16,13 +16,15 @@ class Layout extends Component  {
 )  }
 
   SidebarToggleHandler = () => {
-    
+    this.setState((prevState) => {
+      return { showSidebar:  !this.state.showSidebar };
+    })
   }
   render() {
     return (
     <Aux>
 
-    <Toolbar />
+    <Toolbar toggleClicked={this.SidebarToggleHandler}/>
     <Sidebar open={this.state.showSidebar} closed={this.closeSidebar}/>
     <main className="content">
       {this.props.children}
