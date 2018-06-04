@@ -4,6 +4,7 @@ import Team from '../../components/Team/Team'
 import BuildControls from '../../components/Team/BuildControls/BuildControls'
 import Modal from '../../components/UI/Modal/Modal'
 import Summary from '../../components/Team/Summary/Summary'
+import axios from '../../axios-file'
 
 
 const ELEMENT_POINTS = {
@@ -95,7 +96,18 @@ class TeamBuilder extends Component {
   }
 
   continueSave = () => {
-    alert('continueee')
+    // alert('continueee')
+    const team = {
+      elements: this.state.elements,
+      points: this.state.totalPoints,
+      user: {
+        name: 'Bob',
+        email: 'test@test.com'
+      }
+    }
+    axios.post('/teams.json', team)
+      .then(response => console.log(response))
+      .catch(error => console.log(error))
   }
 
   render() {

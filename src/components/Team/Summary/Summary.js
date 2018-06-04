@@ -28,8 +28,8 @@ class Summary extends React.Component {
         </ul>
         <p>Total Points: {this.props.points}</p>
         <p>Continue?</p>
-      <Button clicked={this.props.purchaseCanc} type="danger">Cancel</Button>
-      <Button clicked={this.props.purchaseCont} type="success">Continue</Button>
+      <Button clicked={this.props.saveCanc} type="danger">Cancel</Button>
+      <Button clicked={this.props.saveCont} type="success">Continue</Button>
       </Aux>
     )
   }
