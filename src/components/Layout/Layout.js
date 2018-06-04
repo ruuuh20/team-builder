@@ -14,6 +14,10 @@ class Layout extends Component  {
       showSidebar: false
     }
 )  }
+
+  SidebarToggleHandler = () => {
+    
+  }
   render() {
     return (
     <Aux>
