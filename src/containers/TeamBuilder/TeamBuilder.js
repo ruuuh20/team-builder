@@ -112,7 +112,8 @@ class TeamBuilder extends Component {
         <Summary
           elements={this.state.elements}
           purchaseCanc={this.cancelPurchase}
-          purchaseCont={this.continuePurchase} />
+          purchaseCont={this.continuePurchase}
+          points={this.state.totalPoints} />
       </Modal>
       <Team elements={this.state.elements}/>
       <BuildControls

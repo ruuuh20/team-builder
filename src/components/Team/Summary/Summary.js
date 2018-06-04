@@ -21,6 +21,7 @@ const Summary = (props) => {
         {elementsSummary}
 
       </ul>
+      <p>Total Points: {props.points}</p>
       <p>Continue?</p>
     <Button clicked={props.purchaseCanc} type="danger">Cancel</Button>
     <Button clicked={props.purchaseCont} type="success">Continue</Button>

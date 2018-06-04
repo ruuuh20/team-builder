@@ -1,0 +1,28 @@
+.sidebar {
+  position: fixed;
+  max-width: 70%;
+  width: 280px;
+  left: 0;
+  top: 0;
+  z-index: 70;
+  background-color: #fff;
+  padding: 30px;
+  transition: transform 0.3s ease-out;
+  box-sizing: border-box;
+
+}
+
+@media (min-width: 500px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+.open {
+  transform: translateX(0);
+
+}
+
+.close {
+  transform: translateX(-100%);
+}
