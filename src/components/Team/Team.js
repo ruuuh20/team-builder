@@ -14,7 +14,7 @@ const Team = (props) => {
       return arr.concat(el)
     }, [])
     if (transformedElements.length === 0) {
-      transformedElements = <p>Choose team elements</p>
+      transformedElements = <p>Add Player Positions</p>
     }
   return (
 
@@ -24,7 +24,7 @@ const Team = (props) => {
       {transformedElements}
     </div>
     </div>
-    
+
   );
 }
 

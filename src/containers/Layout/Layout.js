@@ -20,12 +20,16 @@ class Layout extends Component  {
       return { showSidebar:  !this.state.showSidebar };
     })
   }
+
+
+
+  // <Sidebar open={this.state.showSidebar} closed={this.closeSidebar}/>
   render() {
     return (
     <Aux>
 
     <Toolbar toggleClicked={this.SidebarToggleHandler}/>
-    <Sidebar open={this.state.showSidebar} closed={this.closeSidebar}/>
+
     <main className="content">
       {this.props.children}
     </main>

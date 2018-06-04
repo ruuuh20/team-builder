@@ -24,7 +24,7 @@ const BuildControls = (props) => (
     ))}
     <button
     className="completeButton"
-    disabled={!props.purchaseable}
+    disabled={!props.saveable}
     onClick={props.ordered}
     >
     Complete

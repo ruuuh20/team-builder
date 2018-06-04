@@ -7,10 +7,10 @@ import Summary from '../../components/Team/Summary/Summary'
 
 
 const ELEMENT_POINTS = {
-  goalkeeper: 12,
-  midfielder: 20,
+  goalkeeper: 30,
+  midfielder: 45,
   forward: 50,
-  defender: 30
+  defender: 40
 }
 
 class TeamBuilder extends Component {
@@ -25,12 +25,12 @@ class TeamBuilder extends Component {
         forward: 0
       },
       totalPoints: 10,
-      purchaseable: false,
-      purchasing: false
+      saveable: false,
+      saving: false
     }
   }
 
-  updatePurchaseState (elements) {
+  updateSaveState (elements) {
 
     const sum = Object.keys(elements).map(elKey => {
       return elements[elKey];
@@ -39,7 +39,7 @@ class TeamBuilder extends Component {
       return sum + el
     }, 0);
     this.setState({
-      purchaseable: sum > 0
+      saveable: sum > 0
       // if at least one element, true
     })
   }
@@ -58,7 +58,7 @@ class TeamBuilder extends Component {
       totalPoints: newPoint,
       elements: updatedElements
     })
-    this.updatePurchaseState(updatedElements);
+    this.updateSaveState(updatedElements);
 
   }
 
@@ -79,22 +79,22 @@ class TeamBuilder extends Component {
       totalPoints: newPoint,
       elements: updatedElements
     })
-      this.updatePurchaseState(updatedElements);
+      this.updateSaveState(updatedElements);
   }
 
-  purchaseHandler = () => {
+  saveHandler = () => {
     this.setState({
-      purchasing: true
+      saving: true
     })
   }
 
-  cancelPurchase = () => {
+  cancelSave = () => {
     this.setState({
-      purchasing: false
+      saving: false
     })
   }
 
-  continuePurchase = () => {
+  continueSave = () => {
     alert('continueee')
   }
 
@@ -108,11 +108,11 @@ class TeamBuilder extends Component {
     }
     return (
       <Aux>
-      <Modal show={this.state.purchasing} modalClosed={this.cancelPurchase}>
+      <Modal show={this.state.saving} modalClosed={this.cancelSave}>
         <Summary
           elements={this.state.elements}
-          purchaseCanc={this.cancelPurchase}
-          purchaseCont={this.continuePurchase}
+          saveCanc={this.cancelSave}
+          saveCont={this.continueSave}
           points={this.state.totalPoints} />
       </Modal>
       <Team elements={this.state.elements}/>
@@ -121,8 +121,8 @@ class TeamBuilder extends Component {
         elementRemoved={this.removeElementHandler}
         disabled={disabledInfo}
         points={this.state.totalPoints}
-        purchaseable={this.state.purchaseable}
-        ordered={this.purchaseHandler}
+        saveable={this.state.saveable}
+        ordered={this.saveHandler}
       />
       </Aux>
     )

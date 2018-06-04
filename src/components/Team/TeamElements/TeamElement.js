@@ -12,14 +12,14 @@ class TeamElement extends Component  {
           break;
         case ('midfielder'):
           element = (
-            <div className='midfielder'></div>
+            <div className="player player-five">x</div>
           )
           break;
         case ('defender'):
-          element = <div className="defender"></div>;
+          element =   <div className="player player-one">x</div>;
           break;
         case ('goalkeeper'):
-          element = <div className="goalkeeper"></div>
+          element =   <div className="player player-goalkeeper">GK</div>
           break;
         case ('field'):
           element = (
