@@ -25,7 +25,7 @@ class Layout extends Component  {
     <Aux>
 
     <Toolbar toggleClicked={this.SidebarToggleHandler}/>
-    <Sidebar open={this.state.showSidebar} closed={this.closeSidebar}/>
+
     <main className="content">
       {this.props.children}
     </main>

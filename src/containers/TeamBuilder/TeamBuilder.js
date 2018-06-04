@@ -7,10 +7,10 @@ import Summary from '../../components/Team/Summary/Summary'
 
 
 const ELEMENT_POINTS = {
-  top: 12,
-  bottom: 20,
-  red: 50,
-  blue: 30
+  goalkeeper: 12,
+  midfielder: 20,
+  forward: 50,
+  defender: 30
 }
 
 class TeamBuilder extends Component {
@@ -19,10 +19,10 @@ class TeamBuilder extends Component {
     super(props);
     this.state = {
       elements: {
-        top: 0,
-        blue: 0,
-        bottom: 0,
-        red: 0
+        goalkeeper: 0,
+        defender: 0,
+        midfielder: 0,
+        forward: 0
       },
       totalPoints: 10,
       purchaseable: false,

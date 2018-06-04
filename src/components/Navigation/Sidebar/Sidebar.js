@@ -7,7 +7,7 @@ import Aux from '../../../hoc/Aux'
 
 const Sidebar = (props) => {
 
-  let classes = ["sdebar", "close"];
+  let classes = ["sidebar", "close"];
   if (props.open) {
     classes = ["sidebar", "open"]
   }

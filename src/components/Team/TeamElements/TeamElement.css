@@ -18,7 +18,7 @@
 
 }
 
-.blue {
+.defender {
   width: 85%;
   height: 10%;
   background-color: #3E6990;
@@ -26,16 +26,47 @@
   margin: 2% auto;
 }
 
-.red {
+.goalkeeper {
   width: 70%;
   height: 5%;
   background-color: #93032E;
   margin: 2% auto;
 }
 
-.field {
+/* .field {
   width: 60%;
   height: 100%;
-  background-color: #0E7C7B;
+  background-color: #6E8C57;
   margin: auto;
+} */
+
+.field {
+  /* background-color: #206C3F; */
+    background-color: #6E8C57;
+  border-radius: 10px;
+  color: #fff;
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 10px;
+  grid-template-rows: repeat(12, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  padding: 1em;
+  margin-bottom: 2em;
+}
+
+.player {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.player-goalkeeper {
+  grid-row: span 12;
+}
+
+.player-one, .player-two, .player-three, .player-four, .player-five, .player-six, .player-seven, .player-eight {
+  grid-row: span 3;
+}
+.player-nine, .player-ten {
+  grid-row: span 6;
 }

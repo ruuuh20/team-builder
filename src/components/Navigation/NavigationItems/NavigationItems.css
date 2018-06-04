@@ -33,7 +33,7 @@
   color: $fff
 }
 
-@media (min-width: 500px) {
+@media (max-width: 500px) {
   .navigation-items {
     margin: 0;
     list-style: none;

@@ -22,7 +22,23 @@ class TeamElement extends Component  {
           element = <div className="goalkeeper"></div>
           break;
         case ('field'):
-          element = <div className="field"></div>
+          element = (
+          <div className="field">
+
+            <div className="player player-goalkeeper">GK</div>
+              <div className="player player-one">x</div>
+              <div className="player player-two">x</div>
+              <div className="player player-three">x</div>
+              <div className="player player-four">x</div>
+              <div className="player player-five">x</div>
+              <div className="player player-six">x</div>
+              <div className="player player-seven">x</div>
+              <div className="player player-eight">x</div>
+              <div className="player player-nine">x</div>
+              <div className="player player-ten">x</div>
+
+          </div>
+        )
           break;
         default:
           element = null
