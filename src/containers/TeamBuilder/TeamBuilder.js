@@ -4,7 +4,8 @@ import Team from '../../components/Team/Team'
 import BuildControls from '../../components/Team/BuildControls/BuildControls'
 import Modal from '../../components/UI/Modal/Modal'
 import Summary from '../../components/Team/Summary/Summary'
-import axios from '../../axios-file'
+import axios from '../../axios-file';
+import Spinner from '../../components/UI/Spinner/Spinner'
 
 
 const ELEMENT_POINTS = {
@@ -27,7 +28,8 @@ class TeamBuilder extends Component {
       },
       totalPoints: 10,
       saveable: false,
-      saving: false
+      saving: false,
+      loading: false
     }
   }
 
@@ -97,6 +99,9 @@ class TeamBuilder extends Component {
 
   continueSave = () => {
     // alert('continueee')
+    this.setState({
+      loading: true
+    })
     const team = {
       elements: this.state.elements,
       points: this.state.totalPoints,
@@ -106,8 +111,15 @@ class TeamBuilder extends Component {
       }
     }
     axios.post('/teams.json', team)
-      .then(response => console.log(response))
-      .catch(error => console.log(error))
+      .then(response =>
+      this.setState({
+        loading: false,
+        saving: false
+      }))
+      .catch(error => this.setState({
+        loading: false,
+        saving: false
+      }))
   }
 
   render() {
@@ -118,14 +130,18 @@ class TeamBuilder extends Component {
       disabledInfo[key] = disabledInfo[key] <= 0
       // updates the new state (disabledInfo) with true or false
     }
+    let summary =   <Summary
+        elements={this.state.elements}
+        saveCanc={this.cancelSave}
+        saveCont={this.continueSave}
+        points={this.state.totalPoints} />;
+    if (this.state.loading) {
+      summary = <Spinner />
+    }
     return (
       <Aux>
       <Modal show={this.state.saving} modalClosed={this.cancelSave}>
-        <Summary
-          elements={this.state.elements}
-          saveCanc={this.cancelSave}
-          saveCont={this.continueSave}
-          points={this.state.totalPoints} />
+        {summary}
       </Modal>
       <Team elements={this.state.elements}/>
       <BuildControls
