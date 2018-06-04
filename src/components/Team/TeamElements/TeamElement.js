@@ -7,19 +7,22 @@ class TeamElement extends Component  {
       let element = null;
 
       switch (this.props.type) {
-        case ('bottom'):
-          element = <div className='bottom'></div>;
+        case ('forward'):
+          element = <div className='forward'></div>;
           break;
-        case ('top'):
+        case ('midfielder'):
           element = (
-            <div className='top'></div>
+            <div className='midfielder'></div>
           )
           break;
-        case ('blue'):
-          element = <div className="blue"></div>;
+        case ('defender'):
+          element = <div className="defender"></div>;
           break;
-        case ('red'):
-          element = <div className="red"></div>
+        case ('goalkeeper'):
+          element = <div className="goalkeeper"></div>
+          break;
+        case ('field'):
+          element = <div className="field"></div>
           break;
         default:
           element = null

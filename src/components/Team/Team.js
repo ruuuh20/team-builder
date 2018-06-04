@@ -17,10 +17,9 @@ const Team = (props) => {
       transformedElements = <p>Choose team elements</p>
     }
   return (
-    <div className="burger">
-
+    <div className="team">
+      <TeamElement type="field" />
       {transformedElements}
-
     </div>
   );
 }

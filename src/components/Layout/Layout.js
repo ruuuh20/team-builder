@@ -28,8 +28,8 @@ class Layout extends Component  {
     <Sidebar open={this.state.showSidebar} closed={this.closeSidebar}/>
     <main className="content">
       {this.props.children}
-      </main>
-      </Aux>
+    </main>
+    </Aux>
   )}
 }
 

@@ -2,6 +2,7 @@
   width: 100%;
   background-color: #034C3C;
   display: flex;
+  flex-flow: column;
   align-items: center;
   margin: auto;
   /* padding: 10px 0; */
