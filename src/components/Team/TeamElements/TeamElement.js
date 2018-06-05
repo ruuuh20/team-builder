@@ -8,18 +8,18 @@ class TeamElement extends Component  {
 
       switch (this.props.type) {
         case ('forward'):
-          element =   <div className="player player-nine">x</div>
+          element =   <div className="forward">x</div>
           break;
         case ('midfielder'):
           element = (
-            <div className="player player-five">x</div>
+            <div className="midfielder">x</div>
           )
           break;
         case ('defender'):
-          element =   <div className="player player-one">x</div>;
+          element =   <div className="defender">x</div>;
           break;
         case ('goalkeeper'):
-          element =   <div className="player player-goalkeeper">GK</div>
+          element =   <div className="goalkeeper">GK</div>
           break;
         case ('field'):
           element = (

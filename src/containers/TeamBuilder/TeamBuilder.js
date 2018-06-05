@@ -25,7 +25,8 @@ class TeamBuilder extends Component {
       totalPoints: 10,
       saveable: false,
       saving: false,
-      loading: false
+      loading: false,
+      error: false
     }
   }
 
@@ -34,6 +35,11 @@ class TeamBuilder extends Component {
       .then(response => {
         this.setState({
           elements: response.data
+        })
+      })
+      .catch(error => {
+        this.setState({
+          error: true
         })
       })
   }
@@ -138,8 +144,8 @@ class TeamBuilder extends Component {
     let summary = null;
 
 
+    let team = this.state.error ? <p>Cant be loaded</p> : <Spinner />
 
-    let team = <Spinner />
     if (this.state.elements) {
       team = (
         <Aux>
