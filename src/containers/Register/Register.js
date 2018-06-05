@@ -8,10 +8,33 @@ class Register extends React.Component {
       forward: 1
     }
   }
+
+  componentDidMount() {
+    const query = new URLSearchParams(this.props.location.search);
+    const elements = {};
+    for (let param of query.entries()) {
+      elements[param[0]] = +param[1];
+    }
+    this.setState({
+      elements: elements
+    })
+  }
+
+  registerCancel = () => {
+    this.props.history.goBack();
+
+  }
+
+  registerContinue = () => {
+    this.props.history.replace('/register/contact')
+  }
   render() {
     return (
       <div>
-        <RegisterSummary elements={this.state.elements} />
+        <RegisterSummary
+        elements={this.state.elements}
+        regCanc={this.registerCancel}
+        regCont={this.registerContinue} />
 
       </div>
     )

@@ -110,27 +110,37 @@ class TeamBuilder extends Component {
 
   continueSave = () => {
     // alert('continueee')
-    this.setState({
-      loading: true
-    })
-    const team = {
-      elements: this.state.elements,
-      points: this.state.totalPoints,
-      user: {
-        name: 'Bob',
-        email: 'test@test.com'
-      }
+    // this.setState({
+    //   loading: true
+    // })
+    // const team = {
+    //   elements: this.state.elements,
+    //   points: this.state.totalPoints,
+    //   user: {
+    //     name: 'Bob',
+    //     email: 'test@test.com'
+    //   }
+    // }
+    // axios.post('/teams.json', team)
+    //   .then(response =>
+    //   this.setState({
+    //     loading: false,
+    //     saving: false
+    //   }))
+    //   .catch(error => this.setState({
+    //     loading: false,
+    //     saving: false
+    //   }))
+    const query = [];
+    for (let i in this.state.elements) {
+      query.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.elements[i]))
     }
-    axios.post('/teams.json', team)
-      .then(response =>
-      this.setState({
-        loading: false,
-        saving: false
-      }))
-      .catch(error => this.setState({
-        loading: false,
-        saving: false
-      }))
+    const queryString = query.join('&');
+
+    this.props.history.push({
+      pathname: '/register',
+      search: '?' + queryString
+    })
   }
 
   render() {
@@ -177,9 +187,7 @@ class TeamBuilder extends Component {
       <Modal show={this.state.saving} modalClosed={this.cancelSave}>
         {summary}
       </Modal>
-      {team}
-
-
+        {team}
       </Aux>
     )
   }

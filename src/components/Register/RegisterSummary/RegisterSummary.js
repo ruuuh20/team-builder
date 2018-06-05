@@ -10,8 +10,8 @@ const RegisterSummary = (props) => {
         <div style={{width: '100%', margin: 'auto' }}>
           <Team elements={props.elements}/>
         </div>
-          <Button>Continue</Button>
-          <Button>Cancel</Button>
+          <Button clicked={props.regCanc}>Continue</Button>
+          <Button clicked={props.regCont}>Cancel</Button>
 
     </div>
   )
