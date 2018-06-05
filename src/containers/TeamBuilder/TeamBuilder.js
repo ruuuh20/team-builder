@@ -21,17 +21,21 @@ class TeamBuilder extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      elements: {
-        goalkeeper: 0,
-        defender: 0,
-        midfielder: 0,
-        forward: 0
-      },
+      elements: null,
       totalPoints: 10,
       saveable: false,
       saving: false,
       loading: false
     }
+  }
+
+  componentDidMount() {
+    axios.get('https://react-project-1-cddb1.firebaseio.com/elements.json')
+      .then(response => {
+        this.setState({
+          elements: response.data
+        })
+      })
   }
 
   updateSaveState (elements) {
@@ -131,28 +135,45 @@ class TeamBuilder extends Component {
       disabledInfo[key] = disabledInfo[key] <= 0
       // updates the new state (disabledInfo) with true or false
     }
-    let summary =   <Summary
-        elements={this.state.elements}
-        saveCanc={this.cancelSave}
-        saveCont={this.continueSave}
-        points={this.state.totalPoints} />;
-    if (this.state.loading) {
-      summary = <Spinner />
+    let summary = null;
+
+
+
+    let team = <Spinner />
+    if (this.state.elements) {
+      team = (
+        <Aux>
+        <Team elements={this.state.elements}/>
+        <BuildControls
+          elementAdded={this.addElementHandler}
+          elementRemoved={this.removeElementHandler}
+          disabled={disabledInfo}
+          points={this.state.totalPoints}
+          saveable={this.state.saveable}
+          ordered={this.saveHandler}
+        />
+        </Aux>
+      );
+      summary =   <Summary
+          elements={this.state.elements}
+          saveCanc={this.cancelSave}
+          saveCont={this.continueSave}
+          points={this.state.totalPoints} />;
     }
+
+
+    if (this.state.loading) {
+        summary = <Spinner />
+    }
+
     return (
       <Aux>
       <Modal show={this.state.saving} modalClosed={this.cancelSave}>
         {summary}
       </Modal>
-      <Team elements={this.state.elements}/>
-      <BuildControls
-        elementAdded={this.addElementHandler}
-        elementRemoved={this.removeElementHandler}
-        disabled={disabledInfo}
-        points={this.state.totalPoints}
-        saveable={this.state.saveable}
-        ordered={this.saveHandler}
-      />
+      {team}
+
+
       </Aux>
     )
   }
