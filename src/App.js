@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Layout from './containers/Layout/Layout'
 import TeamBuilder from './containers/TeamBuilder/TeamBuilder'
+import Register from './containers/Register/Register'
 
 class App extends Component {
   render() {
@@ -10,6 +11,7 @@ class App extends Component {
       <div>
       <Layout>
         <TeamBuilder />
+        <Register />
 
       </Layout>
 
