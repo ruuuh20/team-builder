@@ -1,22 +1,29 @@
 import React from 'react';
-import RegisterSummary from '../../components/Register/RegisterSummary/RegisterSummary'
+import RegisterSummary from '../../components/Register/RegisterSummary/RegisterSummary';
+import { Route } from 'react-router-dom';
+import UserInfo from './UserInfo/UserInfo'
 
 class Register extends React.Component {
   state = {
-    elements: {
-      goalkeeper: 1,
-      forward: 1
-    }
+    elements: null,
+    points: 0
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const query = new URLSearchParams(this.props.location.search);
     const elements = {};
+    let points = 0
     for (let param of query.entries()) {
-      elements[param[0]] = +param[1];
+      if (param[0] === 'points') {
+        points = param[1];
+      } else {
+        elements[param[0]] = +param[1];
+      }
+
     }
     this.setState({
-      elements: elements
+      elements: elements,
+      totalPoints: points
     })
   }
 
@@ -26,15 +33,16 @@ class Register extends React.Component {
   }
 
   registerContinue = () => {
-    this.props.history.replace('/register/contact')
+    this.props.history.replace('/register/user')
   }
   render() {
     return (
       <div>
         <RegisterSummary
-        elements={this.state.elements}
-        regCanc={this.registerCancel}
-        regCont={this.registerContinue} />
+          elements={this.state.elements}
+          regCanc={this.registerCancel}
+          regCont={this.registerContinue} />
+        <Route path={this.props.match.path + '/user'} render={(props) => (<UserInfo elements={this.state.elements} points={this.state.totalPoints} {...props} />)}/>
 
       </div>
     )

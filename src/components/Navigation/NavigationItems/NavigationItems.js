@@ -14,7 +14,7 @@ const link = {
 const NavigationItems = () => (
   <ul className="navigation-items">
     <NavLink to="/" exact style={link}>Builder</NavLink>
-    <NavLink to="/" exact style={link}>Checkout</NavLink>
+    <NavLink to="/" exact style={link}>My Teams</NavLink>
   </ul>
 )
 
