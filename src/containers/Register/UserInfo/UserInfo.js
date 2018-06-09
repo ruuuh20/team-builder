@@ -19,7 +19,7 @@ class UserInfo extends Component {
       loading: true
     })
     const team = {
-      elements: this.state.elements,
+      elements: this.props.elements,
       points: this.props.points,
       user: {
         name: 'Bob',
