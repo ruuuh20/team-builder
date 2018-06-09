@@ -13,8 +13,8 @@ const link = {
 
 const NavigationItems = () => (
   <ul className="navigation-items">
-    <NavLink to="/" exact style={link}>Builder</NavLink>
-    <NavLink to="/" exact style={link}>My Teams</NavLink>
+    <NavLink to="/" activeClassName="selected" exact style={link}>Builder</NavLink>
+    <NavLink to="/teams" activeClassName="selected" exact style={link}>My Teams</NavLink>
   </ul>
 )
 

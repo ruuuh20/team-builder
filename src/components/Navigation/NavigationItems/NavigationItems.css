@@ -25,9 +25,7 @@
   display: block;
 }
 
-.nav-item a:hover,
-.nav-item a:active,
-.nav-item a.active
+.selected
 {
   background-color: #C7D2E1;
   /* border-bottom:  */

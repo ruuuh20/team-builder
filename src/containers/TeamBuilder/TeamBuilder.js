@@ -110,31 +110,12 @@ class TeamBuilder extends Component {
 
   continueSave = () => {
     // alert('continueee')
-    // this.setState({
-    //   loading: true
-    // })
-    // const team = {
-    //   elements: this.state.elements,
-    //   points: this.state.totalPoints,
-    //   user: {
-    //     name: 'Bob',
-    //     email: 'test@test.com'
-    //   }
-    // }
-    // axios.post('/teams.json', team)
-    //   .then(response =>
-    //   this.setState({
-    //     loading: false,
-    //     saving: false
-    //   }))
-    //   .catch(error => this.setState({
-    //     loading: false,
-    //     saving: false
-    //   }))
+
     const query = [];
     for (let i in this.state.elements) {
       query.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.elements[i]))
     }
+    query.push('points=' + this.state.totalPoints)
     const queryString = query.join('&');
 
     this.props.history.push({
