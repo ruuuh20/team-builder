@@ -12,12 +12,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import withError from '../../hoc/withError/withError';
 
 
-const ELEMENT_POINTS = {
-  goalkeeper: 30,
-  midfielder: 45,
-  forward: 50,
-  defender: 40
-}
+
 
 class TeamBuilder extends Component {
 
@@ -25,9 +20,6 @@ class TeamBuilder extends Component {
     super(props);
     this.state = {
 
-
-      totalPoints: 10,
-      saveable: false,
       saving: false,
       loading: false,
       error: false
@@ -56,49 +48,50 @@ class TeamBuilder extends Component {
     .reduce((sum, el) => {
       return sum + el
     }, 0);
-    this.setState({
-      saveable: sum > 0
-      // if at least one element, true
-    })
+    // this.setState({
+    //   saveable: sum > 0
+    //   // if at least one element, true
+    // })
+    return sum > 0;
   }
 
-  addElementHandler = (type) => {
-    const oldCount = this.state.elements[type];
-    const updatedCount = oldCount + 1;
-    const updatedElements = {
-      ...this.state.elements
-    };
-    updatedElements[type] = updatedCount;
-    const pointAddition = ELEMENT_POINTS[type];
-    const oldPoint = this.state.totalPoints;
-    const newPoint = oldPoint + pointAddition;
-    this.setState({
-      totalPoints: newPoint,
-      elements: updatedElements
-    })
-    this.updateSaveState(updatedElements);
-
-  }
-
-  removeElementHandler = (type) => {
-    const oldCount = this.state.elements[type];
-    if (oldCount <= 0) {
-      return;
-    }
-    const updatedCount = oldCount - 1;
-    const updatedElements = {
-      ...this.state.elements
-    };
-    updatedElements[type] = updatedCount;
-    const pointReduction = ELEMENT_POINTS[type];
-    const oldPoint = this.state.totalPoints;
-    const newPoint = oldPoint - pointReduction;
-    this.setState({
-      totalPoints: newPoint,
-      elements: updatedElements
-    })
-      this.updateSaveState(updatedElements);
-  }
+  // addElementHandler = (type) => {
+  //   const oldCount = this.state.elements[type];
+  //   const updatedCount = oldCount + 1;
+  //   const updatedElements = {
+  //     ...this.state.elements
+  //   };
+  //   updatedElements[type] = updatedCount;
+  //   const pointAddition = ELEMENT_POINTS[type];
+  //   const oldPoint = this.state.totalPoints;
+  //   const newPoint = oldPoint + pointAddition;
+  //   this.setState({
+  //     totalPoints: newPoint,
+  //     elements: updatedElements
+  //   })
+  //   this.updateSaveState(updatedElements);
+  //
+  // }
+  //
+  // removeElementHandler = (type) => {
+  //   const oldCount = this.state.elements[type];
+  //   if (oldCount <= 0) {
+  //     return;
+  //   }
+  //   const updatedCount = oldCount - 1;
+  //   const updatedElements = {
+  //     ...this.state.elements
+  //   };
+  //   updatedElements[type] = updatedCount;
+  //   const pointReduction = ELEMENT_POINTS[type];
+  //   const oldPoint = this.state.totalPoints;
+  //   const newPoint = oldPoint - pointReduction;
+  //   this.setState({
+  //     totalPoints: newPoint,
+  //     elements: updatedElements
+  //   })
+  //     this.updateSaveState(updatedElements);
+  // }
 
   saveHandler = () => {
     this.setState({
@@ -113,19 +106,14 @@ class TeamBuilder extends Component {
   }
 
   continueSave = () => {
-    // alert('continueee')
+    // const query = [];
+    // for (let i in this.state.elements) {
+    //   query.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.elements[i]))
+    // }
+    // query.push('points=' + this.state.totalPoints)
+    // const queryString = query.join('&');
 
-    const query = [];
-    for (let i in this.state.elements) {
-      query.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.elements[i]))
-    }
-    query.push('points=' + this.state.totalPoints)
-    const queryString = query.join('&');
-
-    this.props.history.push({
-      pathname: '/register',
-      search: '?' + queryString
-    })
+    this.props.history.push('/register')
   }
 
   render() {
@@ -149,8 +137,8 @@ class TeamBuilder extends Component {
           elementAdded={this.props.onElementAdded}
           elementRemoved={this.props.onElementRemoved}
           disabled={disabledInfo}
-          points={this.state.totalPoints}
-          saveable={this.state.saveable}
+          points={this.props.points}
+          saveable={this.updateSaveState(this.props.positions)}
           ordered={this.saveHandler}
         />
         </Aux>
@@ -159,7 +147,7 @@ class TeamBuilder extends Component {
           elements={this.props.positions}
           saveCanc={this.cancelSave}
           saveCont={this.continueSave}
-          points={this.state.totalPoints} />;
+          points={this.props.points} />;
     }
 
 
@@ -180,7 +168,8 @@ class TeamBuilder extends Component {
 
 const mapStateToProps = state => {
   return {
-    positions: state.elements
+    positions: state.elements,
+    points: state.totalPoints
   }
 }
 const mapDispatchToProps = dispatch => {

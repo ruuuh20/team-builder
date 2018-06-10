@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Button from '../../../components/UI/Button/Button'
 import './UserInfo.css';
 import axios from '../../../axios-file';
-import Spinner from '../../../components/UI/Spinner/Spinner'
+import Spinner from '../../../components/UI/Spinner/Spinner';
+import { connect } from 'react-redux'
 
 
 
@@ -19,7 +20,7 @@ class UserInfo extends Component {
       loading: true
     })
     const team = {
-      elements: this.props.elements,
+      elements: this.props.positions,
       points: this.props.points,
       user: {
         name: 'Bob',
@@ -64,4 +65,11 @@ class UserInfo extends Component {
 
 }
 
-export default UserInfo;
+const mapStateToProps = state => {
+  return {
+    positions: state.elements,
+    points: state.totalPoints
+  }
+}
+
+export default connect(mapStateToProps)(UserInfo);
