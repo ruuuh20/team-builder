@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import Aux from '../../hoc/Aux'
-import Team from '../../components/Team/Team'
-import BuildControls from '../../components/Team/BuildControls/BuildControls'
-import Modal from '../../components/UI/Modal/Modal'
-import Summary from '../../components/Team/Summary/Summary'
+import * as actionTypes from '../../store/actions'
+
+import { connect } from 'react-redux';
+import Aux from '../../hoc/Aux';
+import Team from '../../components/Team/Team';
+import BuildControls from '../../components/Team/BuildControls/BuildControls';
+import Modal from '../../components/UI/Modal/Modal';
+import Summary from '../../components/Team/Summary/Summary';
 import axios from '../../axios-file';
-import Spinner from '../../components/UI/Spinner/Spinner'
-import withError from '../../hoc/withError/withError'
+import Spinner from '../../components/UI/Spinner/Spinner';
+import withError from '../../hoc/withError/withError';
 
 
 const ELEMENT_POINTS = {
@@ -21,7 +24,8 @@ class TeamBuilder extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      elements: null,
+
+
       totalPoints: 10,
       saveable: false,
       saving: false,
@@ -126,7 +130,7 @@ class TeamBuilder extends Component {
 
   render() {
     const disabledInfo = {
-      ...this.state.elements
+      ...this.props.positions
     }
     for (let key in disabledInfo) {
       disabledInfo[key] = disabledInfo[key] <= 0
@@ -137,13 +141,13 @@ class TeamBuilder extends Component {
 
     let team = this.state.error ? <p>Cant be loaded</p> : <Spinner />
 
-    if (this.state.elements) {
+    if (this.props.positions) {
       team = (
         <Aux>
-        <Team elements={this.state.elements}/>
+        <Team elements={this.props.positions}/>
         <BuildControls
-          elementAdded={this.addElementHandler}
-          elementRemoved={this.removeElementHandler}
+          elementAdded={this.props.onElementAdded}
+          elementRemoved={this.props.onElementRemoved}
           disabled={disabledInfo}
           points={this.state.totalPoints}
           saveable={this.state.saveable}
@@ -152,7 +156,7 @@ class TeamBuilder extends Component {
         </Aux>
       );
       summary =   <Summary
-          elements={this.state.elements}
+          elements={this.props.positions}
           saveCanc={this.cancelSave}
           saveCont={this.continueSave}
           points={this.state.totalPoints} />;
@@ -174,4 +178,17 @@ class TeamBuilder extends Component {
   }
 }
 
-export default withError(TeamBuilder, axios);
+const mapStateToProps = state => {
+  return {
+    positions: state.elements
+  }
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    onElementAdded: (posName) => dispatch({ type: actionTypes.ADD_ELEMENT, elementName: posName }),
+    onElementRemoved: (posName) => dispatch({ type: actionTypes.REMOVE_ELEMENT, elementName: posName })
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(withError(TeamBuilder, axios));
