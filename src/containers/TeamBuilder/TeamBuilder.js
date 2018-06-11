@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as actionTypes from '../../store/actions'
+import * as teamBuilderActions from '../../store/actions/index'
 
 import { connect } from 'react-redux';
 import Aux from '../../hoc/Aux';
@@ -174,8 +174,8 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    onElementAdded: (posName) => dispatch({ type: actionTypes.ADD_ELEMENT, elementName: posName }),
-    onElementRemoved: (posName) => dispatch({ type: actionTypes.REMOVE_ELEMENT, elementName: posName })
+    onElementAdded: (posName) => dispatch(teamBuilderActions.addElement(posName)),
+    onElementRemoved: (posName) => dispatch(teamBuilderActions.removElement(posName))
   }
 }
 

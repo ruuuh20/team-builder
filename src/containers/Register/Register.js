@@ -40,7 +40,7 @@ class Register extends React.Component {
           regCanc={this.registerCancel}
           regCont={this.registerContinue} />
         <Route path={this.props.match.path + '/user'}
-        components={UserInfo}
+        component={UserInfo}
         />
 
       </div>

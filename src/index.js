@@ -6,9 +6,9 @@ import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import reducer from './store/reducers';
+import teamBuilderReducer from './store/reducers/TeamBuilder';
 
-const store = createStore(reducer)
+const store = createStore(teamBuilderReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 const app = (
   <Provider store={store}>
