@@ -1,13 +1,9 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-  elements: {
-    defender: 0,
-    midfielder: 0,
-    forward: 0,
-    goalkeeper: 0
-  },
+  elements: null,
   totalPoints: 10,
+  error: false
 };
 
 const ELEMENT_POINTS = {

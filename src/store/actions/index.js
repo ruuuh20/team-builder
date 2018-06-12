@@ -1,2 +1,2 @@
-import { addElement, removeElement} from './TeamBuilder'
-import {} from './register'
+export { addElement, removeElement} from './teamBuilder'
+export {} from './register'

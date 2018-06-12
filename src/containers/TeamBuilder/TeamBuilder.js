@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import * as teamBuilderActions from '../../store/actions/index'
+import * as teamBuilderActions from '../../store/actions/index';
+import axios from '../../axios-file';
 
 import { connect } from 'react-redux';
 import Aux from '../../hoc/Aux';
@@ -7,7 +8,7 @@ import Team from '../../components/Team/Team';
 import BuildControls from '../../components/Team/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import Summary from '../../components/Team/Summary/Summary';
-import axios from '../../axios-file';
+
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withError from '../../hoc/withError/withError';
 
@@ -21,23 +22,12 @@ class TeamBuilder extends Component {
     this.state = {
 
       saving: false,
-      loading: false,
-      error: false
+
     }
   }
 
   componentDidMount() {
-    axios.get('https://react-project-1-cddb1.firebaseio.com/elements.json')
-      .then(response => {
-        this.setState({
-          elements: response.data
-        })
-      })
-      .catch(error => {
-        this.setState({
-          error: true
-        })
-      })
+
   }
 
   updateSaveState (elements) {
@@ -151,9 +141,6 @@ class TeamBuilder extends Component {
     }
 
 
-    if (this.state.loading) {
-        summary = <Spinner />
-    }
 
     return (
       <Aux>
@@ -175,7 +162,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onElementAdded: (posName) => dispatch(teamBuilderActions.addElement(posName)),
-    onElementRemoved: (posName) => dispatch(teamBuilderActions.removElement(posName))
+    onElementRemoved: (posName) => dispatch(teamBuilderActions.removeElement(posName))
   }
 }
 
