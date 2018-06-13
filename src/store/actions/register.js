@@ -44,10 +44,10 @@ export const registerInit = () => {
   }
 }
 
-export const fetchRegisteredSuccess = (registered) => {
+export const fetchRegisteredSuccess = (teams) => {
   return {
     type: actionTypes.FETCH_REGISTERED_SUCCESS,
-    registered: registered
+    teams: teams
   }
 }
 
@@ -66,6 +66,7 @@ export const fetchRegisteredStart = () => {
 
 export const fetchRegistered = () => {
   return dispatch => {
+    dispatch(fetchRegisteredStart());
     axios.get('/teams.json')
       .then(response => {
         const fetchedTeams = [];
@@ -77,8 +78,6 @@ export const fetchRegistered = () => {
         }
 
         dispatch(fetchRegisteredSuccess(fetchedTeams))
-
-
       })
       .catch(error => {
         dispatch(fetchRegisteredFail(error))

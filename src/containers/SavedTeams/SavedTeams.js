@@ -1,54 +1,45 @@
 import React, { Component } from 'react';
 import axios from '../../axios-file.js'
 import Save from '../../components/Register/Save';
-import withError from '../../hoc/withError/withError'
+import withError from '../../hoc/withError/withError';
+import * as actions from '../../store/actions/index';
+import{ connect} from 'react-redux';
+import Spinner from '../../components/UI/Spinner/Spinner'
 
 class SavedTeams extends Component {
-  state = {
-    savedteams: [],
-    loading: true
-  }
+
   componentDidMount() {
-    axios.get('/teams.json')
-      .then(response => {
-        const fetchedTeams = [];
-        for (let key in response.data) {
-          fetchedTeams.push({
-            ...response.data[key],
-            id: key
-          })
-        }
-        console.log(response.data)
-        this.setState({
-          savedteams: fetchedTeams,
-          loading: false
-
-        })
-
-      })
-      .catch(error => {
-        this.setState({
-          loading: false
-        })
-      })
-
+    this.props.onFetchRegistered();
   }
   render() {
+    let teams = <Spinner />;
+    if (!this.props.loading) {
+  
+      teams = this.props.teams.map(team => (
+        <Save key={team.id}
+        elements={team.elements}
+        points={team.points} />
+      )
+    )
+    }
     return (
       <div>
-        {this.state.savedteams.map(team => (
-          <Save key={team.id}
-          elements={team.elements}
-          points={team.points} />
-        )
-      )
-
-        }
-
+        {teams}
       </div>
     )
-  }
-
+}
 }
 
-export default withError(SavedTeams, axios);
+const mapStateToProps = state => {
+  return {
+    teams: state.register.teams,
+    loading: state.register.loading
+  }
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchRegistered: () => dispatch(actions.fetchRegistered())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withError(SavedTeams, axios));

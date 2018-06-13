@@ -41,11 +41,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         loading: true
       }
-    }
+
     case actionTypes.FETCH_REGISTERED_SUCCESS:
       return {
         ...state,
-        registered: action.registered,
+        teams: action.teams,
         loading: false
       };
     case actionTypes.FETCH_REGISTERED_FAIL:
