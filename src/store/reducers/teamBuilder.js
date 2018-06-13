@@ -33,6 +33,17 @@ const reducer = (state = initialState, action) => {
         },
         totalPoints: state.totalPoints - ELEMENT_POINTS[action.elementName]
       }
+    case actionTypes.SET_ELEMENTS:
+      return {
+        ...state,
+        elements: action.elements,
+        error: false
+      }
+    case actionTypes.FETCH_ELEMENTS_FAILED:
+      return {
+        ...state,
+        error: true
+      }
     default:
       return state;
   }

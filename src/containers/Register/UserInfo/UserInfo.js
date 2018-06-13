@@ -5,6 +5,8 @@ import axios from '../../../axios-file';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import { connect } from 'react-redux';
 import Input from '../../../components/UI/Forms/Input'
+import withError from '../../../hoc/withError/withError'
+import * as actions from '../../../store/actions/index'
 
 
 
@@ -27,15 +29,12 @@ class UserInfo extends Component {
           },
           value: ''
         }
-    },
-    loading: false
+    }
   }
 
   handleRegister= (event) => {
     event.preventDefault()
-    this.setState({
-      loading: true
-    })
+
     const team = {
       elements: this.props.positions,
       points: this.props.points,
@@ -46,18 +45,8 @@ class UserInfo extends Component {
     for (let formElementIdentifier in this.state.registerForm) {
       formData[formElementIdentifier] = this.state.registerForm[formElementIdentifier].value
     }
-    axios.post('/teams.json', team)
-      .then(response => {
-      this.setState({
-        loading: false
-      })
 
-      this.props.history.push('/')
-    })
-      .catch(error => this.setState({
-        loading: false
-
-      }))
+    this.props.onRegister(team)
 
   }
 
@@ -103,7 +92,7 @@ class UserInfo extends Component {
         <Button>Register team</Button>
       </form>
     );
-    if (this.state.loading) {
+    if (this.props.loading) {
       form = <Spinner />
     }
     return (
@@ -119,9 +108,17 @@ class UserInfo extends Component {
 
 const mapStateToProps = state => {
   return {
-    positions: state.elements,
-    points: state.totalPoints
+    positions: state.teamBuilder.elements,
+    points: state.teamBuilder.totalPoints,
+    loading: state.register.loading
   }
 }
 
-export default connect(mapStateToProps)(UserInfo);
+const mapDispatchToProps = dispatch => {
+  return {
+    onRegister: (regInfo) => dispatch(actions.registerTeam(regInfo))
+  }
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withError(UserInfo, axios));

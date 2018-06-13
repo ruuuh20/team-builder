@@ -1,2 +1,2 @@
-export { addElement, removeElement} from './teamBuilder'
-export {} from './register'
+export { addElement, removeElement, initElement } from './teamBuilder'
+export { registerTeam } from './register'

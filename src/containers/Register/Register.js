@@ -1,6 +1,6 @@
 import React from 'react';
 import RegisterSummary from '../../components/Register/RegisterSummary/RegisterSummary';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import UserInfo from './UserInfo/UserInfo';
 import { connect } from 'react-redux'
 
@@ -33,7 +33,9 @@ class Register extends React.Component {
     this.props.history.replace('/register/user')
   }
   render() {
-    return (
+    let summary = <Redirect to="/" />
+    if (this.props.positions) {
+      summary = (
       <div>
         <RegisterSummary
           elements={this.props.positions}
@@ -42,16 +44,18 @@ class Register extends React.Component {
         <Route path={this.props.match.path + '/user'}
         component={UserInfo}
         />
-
       </div>
-    )
+      )
+    }
+    return summary
+
   }
 
 }
 
 const mapStateToProps = state => {
   return {
-    positions: state.elements
+    positions: state.teamBuilder.elements
   }
 }
 

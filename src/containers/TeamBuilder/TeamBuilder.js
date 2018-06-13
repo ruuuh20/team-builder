@@ -13,20 +13,17 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import withError from '../../hoc/withError/withError';
 
 
-
-
 class TeamBuilder extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-
-      saving: false,
-
+      saving: false
     }
   }
 
   componentDidMount() {
+    this.props.onInitElements();
 
   }
 
@@ -38,10 +35,7 @@ class TeamBuilder extends Component {
     .reduce((sum, el) => {
       return sum + el
     }, 0);
-    // this.setState({
-    //   saveable: sum > 0
-    //   // if at least one element, true
-    // })
+
     return sum > 0;
   }
 
@@ -117,7 +111,7 @@ class TeamBuilder extends Component {
     let summary = null;
 
 
-    let team = this.state.error ? <p>Cant be loaded</p> : <Spinner />
+    let team = this.props.error ? <p>Cant be loaded</p> : <Spinner />
 
     if (this.props.positions) {
       team = (
@@ -155,14 +149,16 @@ class TeamBuilder extends Component {
 
 const mapStateToProps = state => {
   return {
-    positions: state.elements,
-    points: state.totalPoints
+    positions: state.teamBuilder.elements,
+    points: state.teamBuilder.totalPoints,
+    error: state.teamBuilder.error
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
     onElementAdded: (posName) => dispatch(teamBuilderActions.addElement(posName)),
-    onElementRemoved: (posName) => dispatch(teamBuilderActions.removeElement(posName))
+    onElementRemoved: (posName) => dispatch(teamBuilderActions.removeElement(posName)),
+    onInitElements: () => dispatch(teamBuilderActions.initElement())
   }
 }
 
