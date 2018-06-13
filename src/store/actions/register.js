@@ -36,3 +36,9 @@ export const registerTeam = (regInfo) => {
       })
   }
 }
+
+export const registerInit = () => {
+  return {
+    type: actionTypes.REGISTER_INIT
+  }
+}

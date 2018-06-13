@@ -2,11 +2,19 @@ import * as actionTypes from '../actions/actionTypes'
 
 const initialState = {
   teams: [],
-  loading: false
+  loading: false,
+  registered: false
 }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.REGISTER_INIT:
+      return {
+        ...state,
+
+        registered: false
+      }
+
     case actionTypes.REGISTER_TEAM_START:
       return {
         ...state,
@@ -20,13 +28,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        registered: true,
         teams: state.teams.concat(newTeam)
       };
     case actionTypes.REGISTER_TEAM_FAIL:
       return {
         ...state,
         loading: false
-
       }
       default:
         return state;

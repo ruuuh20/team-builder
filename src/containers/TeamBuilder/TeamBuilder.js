@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as teamBuilderActions from '../../store/actions/index';
+import * as actions from '../../store/actions/index';
 import axios from '../../axios-file';
 
 import { connect } from 'react-redux';
@@ -156,9 +156,10 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    onElementAdded: (posName) => dispatch(teamBuilderActions.addElement(posName)),
-    onElementRemoved: (posName) => dispatch(teamBuilderActions.removeElement(posName)),
-    onInitElements: () => dispatch(teamBuilderActions.initElement())
+    onElementAdded: (posName) => dispatch(actions.addElement(posName)),
+    onElementRemoved: (posName) => dispatch(actions.removeElement(posName)),
+    onInitElements: () => dispatch(actions.initElement()),
+    onInitRegister: () => dispatch(actions.registerInit())
   }
 }
 

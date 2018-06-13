@@ -2,7 +2,8 @@ import React from 'react';
 import RegisterSummary from '../../components/Register/RegisterSummary/RegisterSummary';
 import { Route, Redirect } from 'react-router-dom';
 import UserInfo from './UserInfo/UserInfo';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/index'
 
 class Register extends React.Component {
 
@@ -24,6 +25,10 @@ class Register extends React.Component {
   //   })
   // }
 
+  componentDidMount() {
+    
+  }
+
   registerCancel = () => {
     this.props.history.goBack();
 
@@ -34,9 +39,13 @@ class Register extends React.Component {
   }
   render() {
     let summary = <Redirect to="/" />
+
+
     if (this.props.positions) {
+      const registeredRedirect = this.props.registered ? <Redirect to="/" /> : null
       summary = (
       <div>
+      {registeredRedirect}
         <RegisterSummary
           elements={this.props.positions}
           regCanc={this.registerCancel}
@@ -55,8 +64,11 @@ class Register extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    positions: state.teamBuilder.elements
+    positions: state.teamBuilder.elements,
+    registered: state.register.registered
   }
 }
+
+
 
 export default connect(mapStateToProps)(Register);

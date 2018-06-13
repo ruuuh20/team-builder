@@ -37,7 +37,8 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         elements: action.elements,
-        error: false
+        error: false,
+        totalPoints: 10
       }
     case actionTypes.FETCH_ELEMENTS_FAILED:
       return {
