@@ -36,6 +36,23 @@ const reducer = (state = initialState, action) => {
         ...state,
         loading: false
       }
+    case actionTypes.FETCH_REGISTERED_START:
+      return {
+        ...state,
+        loading: true
+      }
+    }
+    case actionTypes.FETCH_REGISTERED_SUCCESS:
+      return {
+        ...state,
+        registered: action.registered,
+        loading: false
+      };
+    case actionTypes.FETCH_REGISTERED_FAIL:
+      return {
+        ...state,
+        loading: false
+      }
       default:
         return state;
   }

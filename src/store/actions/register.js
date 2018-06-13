@@ -22,8 +22,9 @@ export const registerTeamStart = () => {
     type: actionTypes.REGISTER_TEAM_START
   }
 }
-//asynch
 
+
+//asynch
 export const registerTeam = (regInfo) => {
   return dispatch => {
     dispatch(registerTeamStart())
@@ -40,5 +41,47 @@ export const registerTeam = (regInfo) => {
 export const registerInit = () => {
   return {
     type: actionTypes.REGISTER_INIT
+  }
+}
+
+export const fetchRegisteredSuccess = (registered) => {
+  return {
+    type: actionTypes.FETCH_REGISTERED_SUCCESS,
+    registered: registered
+  }
+}
+
+export const fetchRegisteredFail = (error) => {
+  return {
+    type: actionTypes.FETCH_REGISTERED_FAIL,
+    error: error
+  }
+}
+
+export const fetchRegisteredStart = () => {
+  return {
+    type: actionTypes.FETCH_REGISTERED_START
+  }
+}
+
+export const fetchRegistered = () => {
+  return dispatch => {
+    axios.get('/teams.json')
+      .then(response => {
+        const fetchedTeams = [];
+        for (let key in response.data) {
+          fetchedTeams.push({
+            ...response.data[key],
+            id: key
+          })
+        }
+
+        dispatch(fetchRegisteredSuccess(fetchedTeams))
+
+
+      })
+      .catch(error => {
+        dispatch(fetchRegisteredFail(error))
+      })
   }
 }
