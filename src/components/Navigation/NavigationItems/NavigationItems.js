@@ -15,6 +15,7 @@ const NavigationItems = () => (
   <ul className="navigation-items">
     <NavLink to="/" activeClassName="selected" exact style={link}>Builder</NavLink>
     <NavLink to="/teams" activeClassName="selected" exact style={link}>My Teams</NavLink>
+    <NavLink to="/auth" activeClassName="selected" exact style={link}>Authenticate</NavLink>
   </ul>
 )
 

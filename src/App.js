@@ -5,7 +5,8 @@ import Layout from './containers/Layout/Layout'
 import TeamBuilder from './containers/TeamBuilder/TeamBuilder'
 import Register from './containers/Register/Register'
 import { Route } from 'react-router-dom'
-import SavedTeams from './containers/SavedTeams/SavedTeams'
+import SavedTeams from './containers/SavedTeams/SavedTeams';
+import Auth from './containers/Auth/Auth'
 
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
 
         <Route path="/register" component={Register} />
         <Route path="/teams" component={SavedTeams} />
+        <Route path="/auth" component={Auth} />
         <Route exact path="/" component={TeamBuilder} />
       </Layout>
 
