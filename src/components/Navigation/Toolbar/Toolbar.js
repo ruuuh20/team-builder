@@ -6,8 +6,8 @@ import Toggle from '../Sidebar/Toggle/Toggle'
 
 const Toolbar = (props) => (
   <header className="toolbar">
-    <Toggle toggleClicked={props.toggleClicked}/>
-    <Logo height="11%"/>
+    // <Toggle toggleClicked={props.toggleClicked}/>
+    <Logo height="14%"/>
     <nav>
       <NavigationItems />
     </nav>

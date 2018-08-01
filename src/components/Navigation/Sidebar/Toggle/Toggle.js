@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Toggle = (props) => (
-  <div onClick={props.toggleClicked}>Menu</div>
+  <div onClick={props.toggleClicked}>-</div>
 
 )
 
