@@ -19,7 +19,6 @@ const BuildControls = (props) => (
                     added={() => props.elementAdded(position.type)}
                     removed={() => props.elementRemoved(position.type)}
                     disabled={props.disabled[position.type]}
-
                      />
     ))}
     <button
