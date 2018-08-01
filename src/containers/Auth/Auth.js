@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Forms/Input'
-import './Auth.css'
+import './Auth.css';
+import * as actions from '../../store/actions/index';
+import { connect } from 'react-redux'
 
 class Auth extends Component {
   state = {
@@ -24,6 +26,24 @@ class Auth extends Component {
       }
 
     }
+  }
+
+  handleInputChange = (event, controlName) => {
+    const updatedControls = {
+      ...this.state.controls,
+      //only the one changed control will be updated
+      [controlName]: {
+        ...this.state.controls[controlName],
+        value: event.target.value,
+        touched: true
+      }
+    }
+    this.setState({ controls: updatedControls})
+  }
+
+  submitHandler = (event) => {
+    event.preventDefault();
+    this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value)
   }
 
   render() {
@@ -49,7 +69,7 @@ class Auth extends Component {
     ))
     return (
       <div className="auth">
-        <form>
+        <form onSubmit={this.submitHandler}>
         {form}
           <Button>Submit
           </Button>
@@ -61,4 +81,10 @@ class Auth extends Component {
   }
 }
 
-export default Auth
+const mapDispatchToProps = dispatch => {
+  return {
+    onAuth: (email, password) => dispatch(actions.auth())
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Auth);
