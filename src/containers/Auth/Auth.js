@@ -62,6 +62,7 @@ class Auth extends Component {
         elementType={formElement.config.elementType}
         elementConfig={formElement.config.elementConfig}
         value={formElement.config.value}
+        touched={formElement.config.touched}
         handleChange={(event) => this.handleInputChange(event, formElement.id)}
 
       />
