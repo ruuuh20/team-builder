@@ -25,10 +25,10 @@ export const registerTeamStart = () => {
 
 
 //asynch
-export const registerTeam = (regInfo) => {
+export const registerTeam = (regInfo, token) => {
   return dispatch => {
     dispatch(registerTeamStart())
-    axios.post('/teams.json', regInfo)
+    axios.post('/teams.json?auth=' + token, regInfo)
       .then(response => {
         dispatch(registerTeamSuccess(response.data.name, regInfo))
     })
@@ -64,10 +64,10 @@ export const fetchRegisteredStart = () => {
   }
 }
 
-export const fetchRegistered = () => {
+export const fetchRegistered = (token) => {
   return dispatch => {
     dispatch(fetchRegisteredStart());
-    axios.get('/teams.json')
+    axios.get('/teams.json?auth=' + token)
       .then(response => {
         const fetchedTeams = [];
         for (let key in response.data) {

@@ -9,7 +9,6 @@ import withError from '../../../hoc/withError/withError'
 import * as actions from '../../../store/actions/index'
 
 
-
 class UserInfo extends Component {
   state = {
     registerForm: {
@@ -46,7 +45,7 @@ class UserInfo extends Component {
       formData[formElementIdentifier] = this.state.registerForm[formElementIdentifier].value
     }
 
-    this.props.onRegister(team)
+    this.props.onRegister(team, this.props.token)
 
   }
 
@@ -110,13 +109,14 @@ const mapStateToProps = state => {
   return {
     positions: state.teamBuilder.elements,
     points: state.teamBuilder.totalPoints,
-    loading: state.register.loading
+    loading: state.register.loading,
+    token: state.auth.token
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onRegister: (regInfo) => dispatch(actions.registerTeam(regInfo))
+    onRegister: (regInfo, token) => dispatch(actions.registerTeam(regInfo, token))
   }
 
 }

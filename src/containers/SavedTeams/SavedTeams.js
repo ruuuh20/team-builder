@@ -9,12 +9,12 @@ import Spinner from '../../components/UI/Spinner/Spinner'
 class SavedTeams extends Component {
 
   componentDidMount() {
-    this.props.onFetchRegistered();
+    this.props.onFetchRegistered(this.props.token);
   }
   render() {
     let teams = <Spinner />;
     if (!this.props.loading) {
-  
+
       teams = this.props.teams.map(team => (
         <Save key={team.id}
         elements={team.elements}
@@ -33,12 +33,14 @@ class SavedTeams extends Component {
 const mapStateToProps = state => {
   return {
     teams: state.register.teams,
-    loading: state.register.loading
+    loading: state.register.loading,
+    //need token to send to onFetchRegistered, to allow authentication
+    token: state.auth.token
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchRegistered: () => dispatch(actions.fetchRegistered())
+    onFetchRegistered: (token) => dispatch(actions.fetchRegistered(token))
   }
 }
 
