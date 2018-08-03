@@ -1,4 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
+import { updateObject } from '../utility'
 
 const initialState = {
   elements: null,
@@ -16,14 +17,14 @@ const ELEMENT_POINTS = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_ELEMENT:
-      return {
-        ...state,
-        elements: {
-          ...state.elements,
-          [action.elementName]: state.elements[action.elementName] + 1
-        },
-        totalPoints: state.totalPoints + ELEMENT_POINTS[action.elementName]
-      }
+    const updatedElement = { [action.elementName]: state.elements[action.elementName] + 1 }
+    const updatedElements = updateObject(state.elements, updatedElement )
+    const updatedState = {
+      elements: updatedElements,
+      totalPoints: state.totalPoints + ELEMENT_POINTS[action.elementName]
+
+    }
+      return updateObject(state, updatedState)
     case actionTypes.REMOVE_ELEMENT:
       return {
         ...state,
