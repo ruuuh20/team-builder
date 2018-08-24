@@ -27,9 +27,9 @@
 
 .selected
 {
-  background-color: #C7D2E1;
+  border-bottom: solid #C7D2E1 1px;
   /* border-bottom:  */
-  color: $fff
+  /* color: $fff */
 }
 
 @media (max-width: 500px) {
